@@ -1,18 +1,17 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import Login from './Login';
-import mapboxgl from 'mapbox-gl';
 
 class App extends React.Component {
-  constructor () {
-    super()
+  constructor() {
+    super();
     this.state = {
-      userIsLoggedIn: false,
-    }
+      userIsLoggedIn: false
+    };
   }
 
   render() {
     return (
-      <div className="App min-h-screen bg-gray-100" >
+      <div className="App min-h-screen bg-gray-100">
         <Login isLoggedIn={this.state.userIsLoggedIn} />
         {/* <div ref={ref}/> */}
       </div>
