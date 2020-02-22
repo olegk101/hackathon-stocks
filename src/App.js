@@ -2,51 +2,81 @@ import React from 'react';
 import Login from './Login';
 import Map from './Map';
 import Offcanvas from './Offcanvas';
-// import CountriesList from './CountriesList';
+import {
+  getGlobalStatus,
+  getToken,
+  saveToken,
+  getUserHoldings,
+  addTicker
+} from './requests';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       userIsLoggedIn: true,
-      indexData: {}
+      indexData: {},
+      userHoldings: []
     };
   }
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        indexData: {
-          DEU: {
-            country: 'Germany',
-            change: -1,
-            price: 20
-          },
-          ESP: {
-            country: 'Spain',
-            change: 2,
-            price: 21
-          },
-          USA: {
-            country: 'USA',
-            change: -3,
-            price: 22
-          },
-          ITA: {
-            country: 'Italyå',
-            change: 5,
-            price: 43
-          }
-        }
-      });
-    }, 2000);
+
+  async getGlobalData() {
+    const data = await getGlobalStatus();
+
+    const indexData = {};
+    data.map(d => {
+      const key = Object.keys(d)[0];
+
+      indexData[key] = d[key];
+    });
+
+    this.setState({
+      indexData
+    });
   }
+
+  async getUserData() {
+    const userHoldings = await getUserHoldings();
+
+    this.setState({
+      userHoldings
+    });
+  }
+
+  async componentDidMount() {
+    try {
+      const token = await getToken();
+      saveToken(token);
+
+      setInterval(() => {
+        this.getGlobalData();
+        this.getUserData();
+      }, 2000);
+    } catch (error) {
+      console.log('err', error);
+    }
+  }
+
+  add = async ticker => {
+    try {
+      await addTicker(ticker);
+      await this.getUserData();
+    } catch (error) {
+      console.log('ERR', error);
+    }
+  };
+
   render() {
     return (
       <div className="App min-h-screen bg-gray-100">
         <Offcanvas type="left" content={this.state.indexData} />
+        <Offcanvas
+          type="right"
+          content={this.state.userHoldings}
+          add={this.add}
+        />
         <Login isLoggedIn={this.state.userIsLoggedIn} />
-        <Map />
-        {/* <CountriesList countryProps={this.state.indexData} /> */}
+        <Map indexData={this.state.indexData} />
       </div>
     );
   }
