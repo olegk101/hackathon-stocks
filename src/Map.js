@@ -1,35 +1,13 @@
 import React, { Component } from 'react';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
-import { scaleSqrt } from 'd3-scale';
 import countries from './countries.json';
+import { getColor } from './utils';
 
 const INITIAL_VIEW_STATE = {
   latitude: 51.47,
   longitude: 0.45,
   zoom: 4,
   bearing: 0
-};
-
-const negativeScale = val =>
-  scaleSqrt()
-    .domain([0, 10])
-    .range(['white', 'red'])(-val);
-
-const positiveScale = scaleSqrt()
-  .domain([0, 10])
-  .range(['white', 'green']);
-
-const regex = /\d{1,3}/g;
-
-const getColor = num => {
-  if (num < 0) {
-    const n = num < -10 ? -10 : num;
-
-    return [...negativeScale(n).matchAll(regex)].map(arr => Number(arr[0]));
-  }
-
-  const n = num > 10 ? 10 : num;
-  return [...positiveScale(n).matchAll(regex)].map(arr => Number(arr[0]));
 };
 
 export default class Map2 extends Component {
@@ -40,27 +18,6 @@ export default class Map2 extends Component {
       }
     }
   };
-
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        indexData: {
-          DEU: {
-            change: -1
-          },
-          ESP: {
-            change: 2
-          },
-          USA: {
-            change: -3
-          },
-          ITA: {
-            change: 5
-          }
-        }
-      });
-    }, 3000);
-  }
 
   _onClick(info) {
     if (info.object) {
