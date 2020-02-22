@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './Login';
 import Map from './Map';
 import Offcanvas from './Offcanvas';
-import CountriesList from './CountriesList';
+// import CountriesList from './CountriesList';
 
 class App extends React.Component {
   constructor() {

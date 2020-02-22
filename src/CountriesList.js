@@ -5,7 +5,7 @@ import './Countries.css';
 function CountriesList(props) {
   return (
     <div className="flex flex-col  ">
-      <h2 className="">Your stocks</h2>
+      <h2 className="text-xl text-center my-4">Your stocks</h2>
 
       <div>
         {Object.values(props.countryProps).map(elem => {
