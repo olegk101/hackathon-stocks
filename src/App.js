@@ -1,11 +1,12 @@
 import React from 'react';
 import Login from './Login';
+import Map from './Map';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      userIsLoggedIn: false
+      userIsLoggedIn: true
     };
   }
 
@@ -13,7 +14,7 @@ class App extends React.Component {
     return (
       <div className="App min-h-screen bg-gray-100">
         <Login isLoggedIn={this.state.userIsLoggedIn} />
-        {/* <div ref={ref}/> */}
+        <Map  />
       </div>
     );
   }
