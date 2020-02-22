@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './Login';
 import Map from './Map';
+import Offcanvas from './Offcanvas';
 
 class App extends React.Component {
   constructor() {
@@ -13,8 +14,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App min-h-screen bg-gray-100">
+        <Offcanvas type="left" />
         <Login isLoggedIn={this.state.userIsLoggedIn} />
-        <Map  />
+        <Map />
       </div>
     );
   }

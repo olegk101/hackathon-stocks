@@ -46,7 +46,16 @@ export default class Map2 extends Component {
       this.setState({
         indexData: {
           DEU: {
-            change: 100
+            change: -1
+          },
+          ESP: {
+            change: 2
+          },
+          USA: {
+            change: -3
+          },
+          ITA: {
+            change: 5
           }
         }
       });
