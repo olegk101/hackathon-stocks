@@ -18,19 +18,23 @@ class App extends React.Component {
         indexData: {
           DEU: {
             country: 'Germany',
-            change: -1
+            change: -1,
+            price: 20
           },
           ESP: {
             country: 'Spain',
-            change: 2
+            change: 2,
+            price: 21
           },
           USA: {
             country: 'USA',
-            change: -3
+            change: -3,
+            price: 22
           },
           ITA: {
             country: 'Italyå',
-            change: 5
+            change: 5,
+            price: 43
           }
         }
       });
@@ -39,10 +43,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="App min-h-screen bg-gray-100">
-        <Offcanvas type="left" />
+        <Offcanvas type="left" content={this.state.indexData} />
         <Login isLoggedIn={this.state.userIsLoggedIn} />
         <Map />
-        <CountriesList countryProps={this.state.indexData} />
+        {/* <CountriesList countryProps={this.state.indexData} /> */}
       </div>
     );
   }
