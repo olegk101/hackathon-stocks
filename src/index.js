@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import './styles/tailwind.css';
 import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoib2tvcm9sa28iLCJhIjoiY2s2eGludmN1MGx5NzNncWxreWFoano4ciJ9.11LI42TlQmXt8AUciI2iqw';
